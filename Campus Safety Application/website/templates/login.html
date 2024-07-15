@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title%}Login{% endblock %}
+{% block styles %}
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+            body {
+                font-family: 'Poppins', sans-serif;
+                background-color: rgb(255, 255, 255);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height:  100vh;
+                margin: 0;
+            }
+            .login-container{
+                background-color: rgb(255, 255, 255);
+                padding: 34px;
+                border-radius: 12px;
+                box-shadow: 0 0 10px rgba(0,0,0, 0.80);
+                width: 400px;
+                text-align: center;
+                margin-top: 20px;
+            }
+            .logo{
+                font-family: 'Lobster', cursive;
+                font-size: 45px;
+                color:  rgb(176, 29, 29);
+                margin-bottom: 20px;
+
+            }
+            .login-container label{
+                display: block;
+                margin-bottom: 8px;
+
+            }
+            .login-container input[type="text"],
+            .login-container input[type="password"]{
+                width: calc(100% - 20px);
+                font-size: 20px;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            .login-container button{
+                width: 100%;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                background-color: rgb(48, 118, 180);
+                color: white;
+                font-size: 16px;
+                cursor:pointer;
+            }
+            .login-container button:hover {
+                background-color: aliceblue;
+            }
+            .login-container .signup-link {
+                text-align: center;
+                margin-top: 10px;
+            }
+            .login-container .signup-link a {
+                color: rgb(48, 118, 180);
+                text-decoration: none;
+            }
+            .login-container .signup-link a:hover {
+                text-decoration: underline;
+            }
+
+        </style>
+
+{% endblock %}
+{% block content %}
+        <div class="login-container">
+            <div class="logo">Campus Safety</div>
+            <form action="/login" method="post">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+                <label for ="password">Password</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Login</button>
+            </from>
+            <div class="signup-link">
+                <a href="/sign-up">Sign Up</a>
+            </div>
+{% endblock %}
