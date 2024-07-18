@@ -1,5 +1,65 @@
 {% extends "base.html" %}
-{% block title%}Login{% endblock %}
-{% block styles %}
-    <title> this is a sign up link
-    </title>
+{% block title %}Sign Up{% endblock %}
+  
+{% block content %}
+<style>
+            .sign-up-container{
+                background-color: rgb(255, 255, 255);
+                padding: 40px;
+                border-radius: 12px;
+                box-shadow: 0 0 10px rgba(86, 84, 84, 0.8);
+                width: 500px;
+                text-align: auto;
+                margin: auto;
+                margin-top: 100px;
+                margin-bottom: 100px;
+            }
+            
+            .sign-up-container input[type="text"],
+            .sign-up-container input[type="email"],
+            .sign-up-container input[type="password"]
+            {
+                width: calc(100%);
+                font-size: 20px;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            .sign-up-container button{
+                width: 100%;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                background-color: rgb(31, 107, 173);
+                color: white;
+                margin-top: 20px;
+                font-size: 16px;
+                cursor:pointer;
+            }
+            .sign-up-container button:hover {
+                background-color: rgb(93, 143, 187);
+            }
+        </style>
+
+        <div class="sign-up-container">
+            <form method="POST">
+                <h1> Sign Up</h1>
+                <label for="name">First Name</label>
+                <input type="text" id="first-name" name="first-name">
+                <label for="name">Last Name</label>
+                <input type="text" id="last-name" name="last-name">
+                <label for="college-email">College Email</label>
+                <input type="email" id="college-email" name="college-email" >
+                <label for ="password">Password</label>
+                <input type="password" id="password" name="password">
+                <label for ="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" name="confirm-password">
+                <button type="submit">Sign Up</button>
+            </form>
+
+{% endblock %}
+
+  
+
+
