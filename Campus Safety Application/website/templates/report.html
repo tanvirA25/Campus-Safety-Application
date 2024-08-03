@@ -1,0 +1,110 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} 
+{% block content%}
+<body>
+  <style>
+            /* alert contianer  */
+           .alert-container {
+            background-color: rgb(255, 255, 255);
+            padding: 25px;
+            padding-top: 32px;
+            border-radius: 12px;
+            box-shadow: 0 0 10px rgba(86, 84, 84, 0.8);
+            width: 1000px;
+            text-align: auto;
+            margin: auto;
+            margin-top: 25px;
+
+            }
+            
+             /* alert contianer  */
+            .alert-title input[type="text"], .short_descp input[type="text"]{
+                width: 100%;
+                font-size: 20px;
+                
+                margin-bottom: 15px;
+                box-shadow: 0 0 10px rgba(220, 220, 225, 0.8);
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            
+            }
+             /* alert contianer decoration for level */
+            .alert-level{
+                font-size: 20px;
+                border: 1px solid #ccc;
+                width: 378px;
+                margin-right: 10px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(220, 220, 225, 0.8);
+                margin-bottom: 10px;  
+            }
+              /* alert contianer decoration for time */
+            .alert-time{
+                font-size: 20px;
+                border: 1px solid #ccc;
+                width: auto;
+                margin-right: 10px;
+                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(220, 220, 225, 0.8);
+                margin-bottom: 10px;  
+            }
+            
+              /* alert contianer decoration for text area */
+            .alert-container textarea{
+                background-color: rgb(255, 255, 255);
+                box-shadow: 0 0 10px rgba(220, 220, 225, 0.8);
+                border: 1px solid #ccc;
+                width: 100%;
+                text-align: left; /* Text align auto is not valid; use left, right, or center */
+                margin: auto;
+                margin-right: 20px;
+                margin-top: 10px;
+                padding: 5px;
+                padding-left: 10px;
+                resize: vertical; /* Allow vertical resizing */
+                box-sizing: border-box; /* Include padding and borders in width */
+                overflow-wrap: break-word; /* Ensures long words break properly */
+                white-space: pre-wrap; /* Preserves whitespace and line breaks */
+            }
+
+            /* alert contianer button decoration*/
+            .alert-container button{
+                    width: 100%;
+                    padding: 10px;
+                    border-radius: 5px;
+                    border: none;
+                    background-color: rgb(31, 107, 173);
+                    color: white;
+                    margin-top: 20px;
+                    font-size: 16px;
+              
+                }
+                 /* alert contianer button hover color */
+            .alert-container button:hover {
+                background-color: rgb(93, 143, 187);
+        }
+        </style>
+
+       <!-- label and input tag -->
+    <div class="alert-container">
+        <form method="POST">
+        <h1><b>Incident Report</b></h1>
+        <div class="alert-title">
+            <label for="alert-title">Alert Title:</label>
+            <input type="text" id="alert-title" name="alert-title" required> 
+        </div>
+        Alert Level: <input type="text" name="alert-level" class="alert-level">
+        
+        Alert Time: <input type="datetime-local"  name="alert_time" class="alert-time" required>
+
+        <div class="short_descp">
+            Location: <input type="text" id="alert_location" name="alert_location" required>
+            <label for="alert-s_descp">Short Description:</label>
+            <input type="text"  name="short_descp"  class="short_descp" required>
+        </div>
+        Long Description: <textarea type="text" name="long_descp" class="form-control" placeholder="Enter your text here..." required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+        </div>
+
+
+    {% endblock %}
