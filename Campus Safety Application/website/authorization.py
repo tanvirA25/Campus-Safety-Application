@@ -2,38 +2,48 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_user, login_required, logout_user, current_user
 
 auth = Blueprint('auth', __name__)
 
-@auth.route('/logout')
-def logout():
-    return "<p>logout</p>"
-
+# main page for login 
 @auth.route('/', methods=['GET','POST'])
 def login_page():
     if request.method == 'POST':
         email = request.form.get('email')
         pass1 = request.form.get('password') 
-        
-        # Debug prints
-        print(f"Email from form: {email}")
-        print(f"Password from form: {pass1}")
-
+        # checks if email exist 
         user = User.query.filter_by(email=email).first()
-        # Debug print
-        print(f"User found in database: {user}")
 
+          # checks if email exists and password matches 
+          # then login remembers it until browser chache is refreshed
+          # after redirect to home page
+          # else flash error message
         if user:
             if check_password_hash(user.password, pass1):
                 flash('Login is successful', category='success')
+                login_user(user, remember=True)
                 return redirect(url_for('pages.home_page'))
             else:
                 flash('Password is incorrect', category='error')
         else:
             flash('Email does not exist', category='error')
 
-    return render_template("login.html")
+    return render_template("login.html", user=current_user)
 
+
+ # when clicked logouts out the account and redirects to login page
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('auth.login_page'))
+
+
+        # gets input from the sign up page commits to database 
+        # goes through multiple condition of complexity for valid account creation
+        # then redirects to home page
+        # else flash error message
 @auth.route('/sign-up', methods=['GET','POST'])
 def sign_up():
     if request.method == 'POST':
@@ -58,10 +68,12 @@ def sign_up():
             new_user = User(email=email, fname = fname, lname=lname, password=generate_password_hash(password1, method='pbkdf2:sha256') )
             db.session.add(new_user)
             db.session.commit()
+            login_user(new_user, remember=True)
+            
   
             flash('Account Succesfully Created', category='success')
-            return redirect(url_for('auth.login_page'))
+            return redirect(url_for('pages.home_page'))
         
         
-    return render_template("sign_up.html")
+    return render_template("sign_up.html", user=current_user)
 
