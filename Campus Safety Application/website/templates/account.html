@@ -1,0 +1,121 @@
+{% extends "base.html" %} {% block title %}Account{% endblock %} 
+{% block content%}
+<style>
+    /* to have side by side container */
+    .display{
+        display: flex;
+        gap: 50px;
+    }
+    .account-container{
+        background-color: rgb(255, 255, 255);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(86, 84, 84, 0.8);
+        width: 400px;
+        text-align: auto;
+        margin: auto;
+        margin-top: 25px;
+    }
+    /* decoration for heading */
+    .account-container h1{
+        font-size: 44px;
+        font-weight: bold;
+    }
+    /* decoration for text label */
+    .account-container label{
+        padding: 5px;
+        font-size: 18px;
+        font-weight: bold;
+        display: block;
+    }
+     /* decoration for text input */
+    .account-container input{
+        background-color: rgb(255, 255, 255);
+        font-family: Poppins, sans-serif;
+        font-size: 20px;
+        border: 5px;
+        border-radius: 5px;
+        width: 100%;
+        padding: 10px;
+        box-shadow: 0 0 10px rgb(165, 165, 165);
+
+    }
+    /* container for all user only for admin account */
+    .all_user_container{
+        background-color: rgb(255, 255, 255);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(86, 84, 84, 0.8);
+        width: 600px;
+        text-align: auto;
+        margin: auto;
+        margin-top: 25px;
+        margin-bottom: 100px;
+    }
+    /* admin account header decoration */
+    .all_user_container h1{
+        font-size: 44px;
+        font-weight: bold;
+    }
+    /* all user table wdith*/
+    .all_user_container table{
+        width: 100%;
+        
+    }
+     /* all user table header decoration*/
+    .all_user_container th{
+        padding: 10px;
+        background-color: rgb(216, 218, 217);
+
+    }
+        /* all user table data decoration*/
+    .all_user_container td{
+        padding: 5px;
+        border-bottom: 1px solid rgba(90, 87, 87, 0.8);
+
+    }
+  
+    </style>a
+
+ <!-- gets informaiton from user table from database read only -->
+<div class="display">
+<div class="account-container">
+    <form method="GET">
+        <h1> Account</h1>
+        <label for="first-name">First Name</label>
+        <input type="text" value="{{ user.fname }}" readonly>
+        <label for="last-name">Last Name</label>
+        <input type="text" value="{{ user.lname }}" readonly>
+        <label for="email">Email</label>
+        <input type="email" value="{{ user.email }}" readonly>
+    </form>
+</div>
+    <!-- if user is admin show all user informaiton from database read only -->
+    {% if admin %}
+    <div class="all_user_container">
+        <h1>All Users</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in account_page %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.fname }}</td>
+                        <td>{{ user.lname }}</td>
+                        <td>{{ user.email }}</td>
+                    
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
